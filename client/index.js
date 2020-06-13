@@ -12,6 +12,7 @@ var mapInstance;
 var userIcon;
 var userRadiusCircle;
 var ambulanceIcon;
+var customMarkers = [];
 
 var expectTime;
 var radius;
@@ -24,14 +25,39 @@ $(document).ready(() => {
         currentCard.fadeOut();
     });
 
+    $('#closeBtn').click(() => {
+        $('#popup-greeting').fadeOut();
+        accepted = false;
+        $('#currentCard').fadeOut();
+        $('#acceptBtn').html("ACCEPT");
+            $('#rejectBtn').html("REJECT");
+    });
+
     $('#acceptBtn').click(() => {
         if (accepted) {
-            // show pop up
+            $('#currentCard').fadeOut();
+            $('#popup-greeting').fadeIn();
+            $('#notification-text').html(`Thank you for helping out.
+            Have a great day!`);
         } else {
+            accepted = true;
             $('#acceptBtn').html("ATTENDED");
             $('#rejectBtn').html("REQUIRE HELP");
         }
     })
+
+    $('#rejectBtn').click(() => {
+        if (accepted) {
+            $('#currentCard').fadeOut();
+            $('#popup-greeting').fadeIn();
+            $('#notification-text').html(`Thank you for helping out.
+            Help from SCDF is on its way!`);
+        } else {
+            $('#currentCard').fadeOut();
+            $('#popup-greeting').fadeIn();
+            $('#notification-text').html(`Thank you for taking your effort to let us know that you are busy.`);
+        }
+    });
 
     mapInstance = L.map('myMap').setView([1.3521, 103.8198], 13);
     // HTML DOMs
@@ -152,7 +178,7 @@ function onLocationFound(e) {
 }
 // error message if gps location not parseable
 function onLocationError(e) {
-    alert(e.message);
+    console.error(e.message);
 }
 
 function handlerForStream (payload){
@@ -167,17 +193,21 @@ function handlerForStream (payload){
     otherCidAttending: 2
     possibleEmergency: "unconsious"
      */
+    customMarkers.forEach(marker => {
+        mapInstance.removeLayer(marker);
+    })
 
     cases.forEach(singleCase => {
-        console.log(singleCase);
         // console.log(singleCase);
         // TODO: check status first, if attended, display the otherCidAttending
-        new customMarker([singleCase.latitude, singleCase.longitude], {
+        var customMaker = new customMarker([singleCase.latitude, singleCase.longitude], {
             clickable: true,
             name: singleCase.caseId,
             address: singleCase.address,
             issue: singleCase.possibleEmergency
-        }).on('click', onClickMarker).addTo(mapInstance);
+        });
+        customMaker.on('click', onClickMarker).addTo(mapInstance);
+        customMarkers.push(customMaker);
     })
 
 }
