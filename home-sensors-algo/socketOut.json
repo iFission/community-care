@@ -1,0 +1,22 @@
+{
+  "cases": [
+    {
+      "caseId": 1,
+      "possibleEmergency": "unconsious",
+      "address": "111111 #01-1111",
+      "latitude": 1,
+      "longitude": 1,
+      "otherCidAttending": 2,
+      "attended": false
+    },
+    {
+      "caseId": 2,
+      "possibleEmergency": "fire",
+      "address": "222222 #02-2222",
+      "latitude": 1,
+      "longitude": 1,
+      "otherCidAttending": 1,
+      "attended": true
+    }
+  ]
+}
