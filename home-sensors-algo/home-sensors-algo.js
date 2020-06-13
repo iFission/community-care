@@ -90,14 +90,16 @@ msg.timeDelta = JSON.stringify({
 });
 
 msg.alert = JSON.stringify({
-  Home_1: {
+  homeAlert: {
+    homeId: msg.deviceId,
     smokeAlert: smokeAlert,
     inactivityAlert: inactivityAlert,
   },
 });
 
 msg.payload = JSON.stringify({
-  Home_1: {
+  homeAlert: {
+    homeId: msg.deviceId,
     electricityLastValue: electricityLastValue,
     electricityLastUpdated: electricityLastUpdated,
     waterLastValue: waterLastValue,
