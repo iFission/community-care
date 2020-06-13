@@ -1,0 +1,6 @@
+{
+  "electricity": random(0, 100),
+  "water": random(0, 100),
+  "motion": random(0, 1),
+  "smoke": random(0,100)
+}
