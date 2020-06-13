@@ -19,10 +19,6 @@
     height: 812px;
     background-color: rgba(255, 255, 255, 1);
     overflow: hidden;
-    --web-view-name: Accept/Reject;
-    --web-view-id: AcceptReject;
-    --web-scale-on-resize: true;
-    --web-enable-deep-linking: true;
 }
 @keyframes fadein {
 
@@ -42,7 +38,7 @@
     overflow: visible;
     width: 375px;
     height: 812px;
-    left: -8px;
+    left: 0;
     top: 0;
 }
 #Group_1 {
@@ -97,9 +93,6 @@
     left: 20px;
     top: 754px;
     overflow: visible;
-    --web-animation: fadein 0.4s ease-out;
-    --web-action-type: page;
-    --web-action-target: Response.html;
     cursor: pointer;
 }
 #Rectangle_5 {
@@ -134,9 +127,6 @@
     left: 202px;
     top: 754px;
     overflow: visible;
-    --web-animation: fadein 0.4s ease-out;
-    --web-action-type: page;
-    --web-action-target: Reject_Response.html;
     cursor: pointer;
 }
 #Rectangle_7 {
