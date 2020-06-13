@@ -1,0 +1,18 @@
+[
+  {
+    "id": "cf3f385f.af7b38",
+    "type": "inject",
+    "z": "cd4f783b.dca318",
+    "name": "",
+    "topic": "",
+    "payload": "Hi there, Johnson",
+    "payloadType": "str",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 540,
+    "y": 320,
+    "wires": [["1a6179fe.2c72a6"]]
+  }
+]

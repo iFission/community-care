@@ -1,0 +1,448 @@
+[
+  {
+    "id": "146b94e0.b75fcb",
+    "type": "tab",
+    "label": "server notify",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "a82a047a.fa1518",
+    "type": "cloudant in",
+    "z": "146b94e0.b75fcb",
+    "name": "QueryDB",
+    "cloudant": "7653cb11.0a8124",
+    "database": "noderedtuecs",
+    "service": "node-red-tuecs-cloudant-1591684447308-19496",
+    "search": "_id_",
+    "design": "",
+    "index": "",
+    "x": 480,
+    "y": 480,
+    "wires": [["aa5e3edd.b92a1", "be5b6f59.872c4"]]
+  },
+  {
+    "id": "aa5e3edd.b92a1",
+    "type": "debug",
+    "z": "146b94e0.b75fcb",
+    "name": "QueryDB",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": true,
+    "complete": "payload",
+    "targetType": "msg",
+    "x": 860,
+    "y": 560,
+    "wires": []
+  },
+  {
+    "id": "61e2d5f.57fc02c",
+    "type": "inject",
+    "z": "146b94e0.b75fcb",
+    "name": "",
+    "topic": "",
+    "payload": "{\"_id\":\"storage/person/homenormal\"}",
+    "payloadType": "json",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 310,
+    "y": 480,
+    "wires": [["a82a047a.fa1518", "3d41dc1e.adfe4c"]]
+  },
+  {
+    "id": "3d41dc1e.adfe4c",
+    "type": "debug",
+    "z": "146b94e0.b75fcb",
+    "name": "inject",
+    "active": false,
+    "tosidebar": true,
+    "console": true,
+    "tostatus": true,
+    "complete": "payload",
+    "targetType": "msg",
+    "x": 480,
+    "y": 540,
+    "wires": []
+  },
+  {
+    "id": "feda4190.b7cac",
+    "type": "debug",
+    "z": "146b94e0.b75fcb",
+    "name": "Decide dataHomeNormal",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": true,
+    "complete": "dataHomeNormal",
+    "targetType": "msg",
+    "x": 890,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "9ca930c4.c56ac",
+    "type": "change",
+    "z": "146b94e0.b75fcb",
+    "name": "",
+    "rules": [
+      {
+        "t": "set",
+        "p": "dataHomeNormal",
+        "pt": "msg",
+        "to": "dataHomeNormal",
+        "tot": "global"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 380,
+    "y": 120,
+    "wires": [["feda4190.b7cac", "17c713e4.24bffc"]]
+  },
+  {
+    "id": "a8d4c8a9.278978",
+    "type": "inject",
+    "z": "146b94e0.b75fcb",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 100,
+    "y": 120,
+    "wires": [["9ca930c4.c56ac"]]
+  },
+  {
+    "id": "17c713e4.24bffc",
+    "type": "change",
+    "z": "146b94e0.b75fcb",
+    "name": "",
+    "rules": [
+      {
+        "t": "set",
+        "p": "dataHomeSmoke",
+        "pt": "msg",
+        "to": "dataHomeSmoke",
+        "tot": "global"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 370,
+    "y": 180,
+    "wires": [["c164d09a.700c38"]]
+  },
+  {
+    "id": "c164d09a.700c38",
+    "type": "change",
+    "z": "146b94e0.b75fcb",
+    "name": "",
+    "rules": [
+      {
+        "t": "set",
+        "p": "dataHomeInactivity",
+        "pt": "msg",
+        "to": "dataHomeInactivity",
+        "tot": "global"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 380,
+    "y": 240,
+    "wires": [["3fd7c111.861bf6"]]
+  },
+  {
+    "id": "4827683a.7cafe",
+    "type": "debug",
+    "z": "146b94e0.b75fcb",
+    "name": "Decide DBID",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": true,
+    "complete": "payload.dbid",
+    "targetType": "msg",
+    "x": 850,
+    "y": 180,
+    "wires": []
+  },
+  {
+    "id": "7c570329.f0ca3c",
+    "type": "websocket out",
+    "z": "146b94e0.b75fcb",
+    "name": "",
+    "server": "",
+    "client": "2ba7d085.156fe",
+    "x": 1260,
+    "y": 500,
+    "wires": []
+  },
+  {
+    "id": "51eb1a0a.f2e864",
+    "type": "function",
+    "z": "146b94e0.b75fcb",
+    "name": "Sender",
+    "func": "// var msg;\nvar emergency = \"someone\";\nif(msg.alerted.homeSmokeAlerted!==undefined && msg.alerted.homeSmokeAlerted===true){\n    // newMsg = {payload: { possibleEmergency: \"fire\"}};\n    emergency = \"fire\";\n}\nelse if(msg.alerted.homeInactivityAlerted!==undefined && msg.alerted.homeInactivityAlerted===true){\n    newMsg = {payload: { possibleEmergency: \"fall\"}};\n    emergency = \"fall\";\n}\n\n\nmsg.payload = {cases:[{\n    caseId: \"1\",\n    possibleEmergency: emergency,\n    address: msg.patientInfo.address,\n    latitude: Number(msg.patientInfo.latitude),\n    longitude: Number(msg.patientInfo.longitude),\n    otherCidAttending: 1,\n    attended: \"false\"\n},\n{\n            caseId: 2,\n            possibleEmergency: \"fire\",\n            address: \"222222 #02-2222\",\n            latitude: 1.3208703,\n            longitude: 103.9244388,\n            otherCidAttending: 1,\n            attended: true\n        }]}\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 1060,
+    "y": 420,
+    "wires": [["aebe4aea.6558e8", "7c570329.f0ca3c", "9574de13.3892a"]]
+  },
+  {
+    "id": "be5b6f59.872c4",
+    "type": "change",
+    "z": "146b94e0.b75fcb",
+    "name": "",
+    "rules": [
+      {
+        "t": "set",
+        "p": "patientInfo",
+        "pt": "msg",
+        "to": "payload",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 650,
+    "y": 420,
+    "wires": [["37bc1881.6a68b8", "d4999cf3.0a578"]]
+  },
+  {
+    "id": "3fd7c111.861bf6",
+    "type": "function",
+    "z": "146b94e0.b75fcb",
+    "name": "decide notify",
+    "func": "msg.payload = {};\n\nlet homeNormalAlerted = context.get(\"homeNormalAlerted\") || false;\nlet homeSmokeAlerted = context.get(\"homeSmokeAlerted\") || false;\nlet homeInactivityAlerted = context.get(\"homeInactivityAlerted\") || false;\n\nif (\n  (msg.dataHomeNormal.homeAlert.inactivityAlert ||\n    msg.dataHomeNormal.homeAlert.smokeAlert) &&\n  !homeNormalAlerted\n) {\n  msg.payload[\"dataHomeNormal\"] = msg.dataHomeNormal.homeAlert;\n  msg.payload[\"dbid\"]=\"storage/person/homenormal\";\n  homeNormalAlerted = true;\n  context.set(\"homeNormalAlerted\", homeNormalAlerted);\n}\n\nif (\n  (msg.dataHomeSmoke.homeAlert.inactivityAlert ||\n    msg.dataHomeSmoke.homeAlert.smokeAlert) &&\n  !homeSmokeAlerted\n) {\n  msg.payload[\"dataHomeSmoke\"] = msg.dataHomeSmoke.homeAlert;\n  msg.payload[\"dbid\"]=\"storage/person/homeSmoke\";\n  homeSmokeAlerted = true;\n  context.set(\"homeSmokeAlerted\", homeSmokeAlerted);\n}\n\nif (\n  (msg.dataHomeInactivity.homeAlert.inactivityAlert ||\n    msg.dataHomeInactivity.homeAlert.smokeAlert) &&\n  !homeInactivityAlerted\n) {\n  msg.payload[\"dataHomeInactivity\"] = msg.dataHomeInactivity.homeAlert;\n  msg.payload[\"dbid\"]=\"storage/person/homeInactivity\";\n  homeInactivityAlerted = true;\n  context.set(\"homeInactivityAlerted\", homeInactivityAlerted);\n}\n\nmsg.alerted = {\n  homeNormalAlerted: homeNormalAlerted,\n  homeSmokeAlerted: homeSmokeAlerted,\n  homeInactivityAlerted: homeInactivityAlerted,\n};\n\nreturn msg;\n",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 330,
+    "y": 300,
+    "wires": [
+      [
+        "4827683a.7cafe",
+        "ab31b35b.758cd",
+        "5be9c839.9a27",
+        "6eedf672.1ae1f8",
+        "4ebeb2f5.81d88c"
+      ]
+    ]
+  },
+  {
+    "id": "305daf20.81c06",
+    "type": "inject",
+    "z": "146b94e0.b75fcb",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 100,
+    "y": 60,
+    "wires": [["bef94403.725d28"]]
+  },
+  {
+    "id": "bef94403.725d28",
+    "type": "function",
+    "z": "146b94e0.b75fcb",
+    "name": "reset context home alerted",
+    "func": "  context.set(\"homeNormalAlerted\", false);\n  context.set(\"homeSmokeAlerted\", false);\n  context.set(\"homeInactivityAlerted\", false);\n  \n  return msg",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 380,
+    "y": 60,
+    "wires": [["9ca930c4.c56ac"]]
+  },
+  {
+    "id": "ab31b35b.758cd",
+    "type": "debug",
+    "z": "146b94e0.b75fcb",
+    "name": "Decide HomeAlerted",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": true,
+    "complete": "dataHomeNormal.homeAlert",
+    "targetType": "msg",
+    "x": 880,
+    "y": 240,
+    "wires": []
+  },
+  {
+    "id": "5be9c839.9a27",
+    "type": "debug",
+    "z": "146b94e0.b75fcb",
+    "name": "Decide Alerted",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": true,
+    "complete": "alerted",
+    "targetType": "msg",
+    "x": 860,
+    "y": 120,
+    "wires": []
+  },
+  {
+    "id": "6eedf672.1ae1f8",
+    "type": "function",
+    "z": "146b94e0.b75fcb",
+    "name": "queryLine",
+    "func": "var newMsg;\n\nif (msg.payload.dbid===undefined){\n    return;\n}\n\nnewMsg = {payload : {_id:msg.payload.dbid}};\nreturn newMsg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 320,
+    "y": 380,
+    "wires": [["69df69a8.0c9308", "a82a047a.fa1518"]]
+  },
+  {
+    "id": "69df69a8.0c9308",
+    "type": "debug",
+    "z": "146b94e0.b75fcb",
+    "name": "queryLine",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": true,
+    "complete": "payload",
+    "targetType": "msg",
+    "x": 860,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "37bc1881.6a68b8",
+    "type": "debug",
+    "z": "146b94e0.b75fcb",
+    "name": "PatientInfo",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": true,
+    "complete": "patientInfo",
+    "targetType": "msg",
+    "x": 870,
+    "y": 480,
+    "wires": []
+  },
+  {
+    "id": "aebe4aea.6558e8",
+    "type": "debug",
+    "z": "146b94e0.b75fcb",
+    "name": "Sender",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": true,
+    "complete": "payload",
+    "targetType": "msg",
+    "x": 1240,
+    "y": 420,
+    "wires": []
+  },
+  {
+    "id": "4ebeb2f5.81d88c",
+    "type": "change",
+    "z": "146b94e0.b75fcb",
+    "name": "",
+    "rules": [
+      {
+        "t": "set",
+        "p": "alerted",
+        "pt": "flow",
+        "to": "alerted",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 880,
+    "y": 300,
+    "wires": [[]]
+  },
+  {
+    "id": "d4999cf3.0a578",
+    "type": "change",
+    "z": "146b94e0.b75fcb",
+    "name": "",
+    "rules": [
+      {
+        "t": "set",
+        "p": "alerted",
+        "pt": "msg",
+        "to": "alerted",
+        "tot": "flow"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 880,
+    "y": 420,
+    "wires": [["51eb1a0a.f2e864"]]
+  },
+  {
+    "id": "9574de13.3892a",
+    "type": "twilio out",
+    "z": "146b94e0.b75fcb",
+    "twilio": "4b682eb3.e41d98",
+    "twilioType": "call",
+    "url": "http://demo.twilio.com/docs/voice.xml",
+    "number": "+6588172025",
+    "name": "",
+    "x": 1230,
+    "y": 320,
+    "wires": []
+  },
+  {
+    "id": "7653cb11.0a8124",
+    "type": "cloudant",
+    "z": "",
+    "host": "myaccountname.cloudant.com",
+    "name": "My Cloudant account"
+  },
+  {
+    "id": "2ba7d085.156fe",
+    "type": "websocket-client",
+    "z": "",
+    "path": "/datastream",
+    "tls": "",
+    "wholemsg": "true"
+  },
+  {
+    "id": "4b682eb3.e41d98",
+    "type": "twilio-api",
+    "z": "",
+    "name": "twilio",
+    "sid": "ACea7e5a8d5790eee73beda8b5689637d1",
+    "from": "+12082093516"
+  }
+]
