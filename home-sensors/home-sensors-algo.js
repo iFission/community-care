@@ -82,23 +82,8 @@ context.set("smokeNoticed", smokeNoticed);
 context.set("smokeAlert", smokeAlert);
 context.set("inactivityAlert", inactivityAlert);
 
-msg.timeDelta = JSON.stringify({
-  electricityTimeDelta: electricityTimeDelta,
-  waterTimeDelta: waterTimeDelta,
-  motionTimeDelta: motionTimeDelta,
-  smokeTimeDelta: smokeTimeDelta,
-});
-
-msg.alert = JSON.stringify({
-  homeAlert: {
-    homeId: msg.deviceId,
-    smokeAlert: smokeAlert,
-    inactivityAlert: inactivityAlert,
-  },
-});
-
-msg.payload = JSON.stringify({
-  homeAlert: {
+msg.data = {
+  homeInfo: {
     homeId: msg.deviceId,
     electricityLastValue: electricityLastValue,
     electricityLastUpdated: electricityLastUpdated,
@@ -108,6 +93,17 @@ msg.payload = JSON.stringify({
     smokeFirstDetected: smokeFirstDetected,
     smokeNoticed: smokeNoticed,
   },
-});
+  homeAlert: {
+    homeId: msg.deviceId,
+    smokeAlert: smokeAlert,
+    inactivityAlert: inactivityAlert,
+  },
+  timeDelta: {
+    electricityTimeDelta: electricityTimeDelta,
+    waterTimeDelta: waterTimeDelta,
+    motionTimeDelta: motionTimeDelta,
+    smokeTimeDelta: smokeTimeDelta,
+  },
+};
 
 return msg;
