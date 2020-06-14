@@ -1,8 +1,0 @@
-// All api keys here
-const tokenForOneMap = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQ5OTIsInVzZXJfaWQiOjQ5OTIsImVtYWlsIjoid2QxMGpwdnQrb25lbWFwQGdtYWlsLmNvbSIsImZvcmV2ZXIiOmZhbHNlLCJpc3MiOiJodHRwOlwvXC9vbTIuZGZlLm9uZW1hcC5zZ1wvYXBpXC92MlwvdXNlclwvc2Vzc2lvbiIsImlhdCI6MTU5MjAxMjkwMiwiZXhwIjoxNTkyNDQ0OTAyLCJuYmYiOjE1OTIwMTI5MDIsImp0aSI6IjI5MDg3OTBlNjQ3ZWQ0NjJjYTUxMmI1MmM5OTcyMzRmIn0.G2RoACJNBYBoyMgw2BtVljA59Io4LCHsLs9I7Ir0-fA"
-const oneMapURL = "https://developers.onemap.sg/privateapi/routingsvc/route?"
-
-export default {
-    mapToken: tokenForOneMap,
-    mapURL: oneMapURL
-}
